@@ -1,1 +1,38 @@
 // Código de Nav acá
+nav {
+    background-color: @nav-bg;
+    border: @nav-border solid 2px;
+    height: auto;
+
+    h2 {
+        text-align: center;
+        height: 2em;
+        padding: .5em 0;
+        // background-color: rgb(132, 132, 217);
+    }
+
+    ul {
+        // display: flex;
+        // justify-content: center;
+        .flex();
+        height: 3em;
+        // background-color: red;
+        
+        li {
+            font-size: 1.6em;
+            margin: 0 1em;
+            padding: .4em 0;
+            // background-color: #f1f112;
+
+            @media @phone {
+                margin: .5em;
+            }
+            
+            a {
+                color: @nav-font;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        }
+    }
+}

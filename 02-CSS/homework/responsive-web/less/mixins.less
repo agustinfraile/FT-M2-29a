@@ -1,1 +1,19 @@
 // Mixins acá
+
+// PARA CUANDO USAN DISPLAY FLEX
+.flex(@justify: center, @align: center) {
+    display: flex;
+    justify-content: @justify;
+    align-items: @align;
+}
+
+// PARA LA IMAGEN
+.imgBRadius(@radius: 20px) {
+    border-radius: @radius;
+}
+
+// PARA EL BOTON DE REGISTRO
+.btnRegistro(@bg-color, @font-color) {
+    background-color: @bg-color;
+    color : @font-color;
+}
