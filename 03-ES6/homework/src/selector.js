@@ -1,15 +1,21 @@
-var traverseDomAndCollectElements = function(matchFunc, startEl) {
+var traverseDomAndCollectElements = function(matchFunc, startEl = document.body) {
   var resultSet = [];
 
   if (typeof startEl === "undefined") {
-    startEl = document.body;
+    // startEl = document.body;
   }
 
   // recorre el árbol del DOM y recolecta elementos que matchien en resultSet
   // usa matchFunc para identificar elementos que matchien
+  if (matchFunc(startEl)) resultSet.push(startEl);
 
+  for (let i = 0; i< startEl.children.length; i++) {
+    let result = traverseDomAndCollectElements(matchFunc, startEl.children[i])
+    // concatenando
+    resultSet = [...resultSet, ...result]
+  }
   // TU CÓDIGO AQUÍ
-  
+  return resultSet;
 };
 
 // Detecta y devuelve el tipo de selector
@@ -18,6 +24,12 @@ var traverseDomAndCollectElements = function(matchFunc, startEl) {
 
 var selectorTypeMatcher = function(selector) {
   // tu código aquí
+  if (selector[0] === '#') return 'id';
+  if (selector[0] === '.') return 'class';
+  for(let i = 0; i < selector.length; i++) {
+    if (selector[i] === '.') return 'tag.class';
+  }
+  return 'tag';
   
 };
 
@@ -30,12 +42,26 @@ var matchFunctionMaker = function(selector) {
   var selectorType = selectorTypeMatcher(selector);
   var matchFunction;
   if (selectorType === "id") { 
-   
+    matchFunction = function(el) {
+      return '#' + el.id == selector;
+    }
   } else if (selectorType === "class") {
-    
+    matchFunction = function(el) {
+      for(let i = 0; i < el.classList.length; i++) {
+        if ('.' + el.classList[i] === selector) return true;
+      }
+      return false;
+    }
   } else if (selectorType === "tag.class") {
-    
+    matchFunction = function(el) {
+      let [t, c] = selector.split('.');
+
+      return matchFunctionMaker(t)(el) && matchFunctionMaker('.'+c)(el);
+    }
   } else if (selectorType === "tag") {
+    matchFunction = function(el) {
+      return el.tagName === selector.toUpperCase();
+    }
     
   }
   return matchFunction;
