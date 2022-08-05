@@ -1,0 +1,34 @@
+.contenedor  {
+    border: #f1f1f1 solid 1px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+    height: auto;
+    position: relative;
+}
+
+.infoCont {
+    display: flex;
+    justify-content: space-around;
+    /* background-color: aqua; */
+}
+
+.infoCont img {
+    background-color: rgb(46, 44, 44);
+    border-radius: 5px;
+}
+
+.btn {
+    /* background-color: blueviolet; */
+    height: min-content;
+    width: min-content;
+    cursor: pointer;
+    background-color: rgb(216, 68, 68);
+    position: absolute;
+    right: 5px;
+    top: 4px;
+    border: none;
+    border-radius: 3px;
+    color: #f1f1f1;
+}
